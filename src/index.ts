@@ -64,7 +64,6 @@ export class List {
     const current = this.#findByIndex(index);
     const { prev } = current;
     const newEl = new Node(el);
-    console.log(current);
     prev!.next = newEl;
     current!.prev = newEl;
     newEl.next = current;
