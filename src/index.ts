@@ -33,7 +33,6 @@ export class List {
     }
     return current;
   }
-
   length(): number {
     return this.len;
   }
@@ -76,7 +75,21 @@ export class List {
     return current.value;
   }
 
-  delete(index: number): string {}
+  delete(index: number): string {
+    this.#validateIndex(index);
+    this.len--;
+    const current = this.#findByIndex(index);
+    if (current === this.#head) {
+      this.#head = current.next;
+    }
+    if (current === this.#tail) {
+      this.#tail = current.prev;
+    }
+    const { prev, next } = current;
+    if (prev) prev.next = next;
+    if (next) next.prev = prev;
+    return current.value;
+  }
 
   deleteAll(el: string): void {}
 

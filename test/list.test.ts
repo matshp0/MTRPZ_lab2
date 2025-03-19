@@ -1,6 +1,20 @@
 import { List } from '../src';
 
+const getElements = (l: List): string => {
+  let result = '';
+  for (let i = 0; i < l.length(); i++) {
+    result += l.get(i);
+  }
+  return result;
+};
+
 describe('List class', () => {
+  let list: List;
+  beforeEach(() => {
+    list = new List();
+    ['a', 'b', 'c', 'd', 'e', 'f'].forEach((item) => list.append(item));
+  });
+
   it('should create list with len = 0', () => {
     const list = new List();
     expect(list.len).toBe(0);
@@ -33,18 +47,26 @@ describe('List class', () => {
   });
 
   it('should return proper value from get method', () => {
-    const list = new List();
-    list.append('a');
-    list.append('b');
-    list.append('c');
-    list.append('d');
-    list.append('e');
-    list.append('f');
     expect(() => list.get(-1)).toThrow();
     expect(() => list.get(100)).toThrow();
     expect(() => list.get(2.5)).toThrow();
     expect(list.get(0)).toBe('a');
     expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('c');
+    expect(list.get(3)).toBe('d');
+    expect(list.get(4)).toBe('e');
     expect(list.get(5)).toBe('f');
+  });
+
+  it('should delete properly elements by index', () => {
+    expect(() => list.get(-1)).toThrow();
+    expect(() => list.get(100)).toThrow();
+    expect(() => list.get(2.5)).toThrow();
+    expect(getElements(list)).toBe('abcdef');
+    expect(list.delete(0)).toBe('a');
+    expect(list.delete(4)).toBe('f');
+    expect(getElements(list)).toBe('bcde');
+    expect(list.delete(2)).toBe('d');
+    expect(getElements(list)).toBe('bce');
   });
 });
