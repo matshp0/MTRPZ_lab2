@@ -33,6 +33,15 @@ export class List {
     }
     return current;
   }
+
+  *[Symbol.iterator](): IterableIterator<string> {
+    let current = this.#head;
+    while (current) {
+      yield current.value;
+      current = current.next;
+    }
+  }
+
   length(): number {
     return this.len;
   }
@@ -56,8 +65,10 @@ export class List {
     this.#validateIndex(index);
     this.len++;
     if (!index) {
-      this.#head!.prev = new Node(el);
-      this.#head = this.#head!.prev;
+      const newEl = new Node(el);
+      newEl.next = this.#head;
+      this.#head!.prev = newEl;
+      this.#head = newEl;
       return;
     }
     const current = this.#findByIndex(index);
@@ -91,13 +102,21 @@ export class List {
     return current.value;
   }
 
-  deleteAll(el: string): void {}
+  deleteAll(el: string): void {
+    this.#validateInput(el);
+    let current = this.#head;
+    for (let i = 0; i < this.len; i++) {
+      if (current!.value === el) {
+        this.delete(i);
+        i--;
+      }
+      current = current!.next;
+    }
+  }
 
   clone(): List {}
 
   reverse(): void {}
-
-  findFirst(el: string): number {}
 
   findFirst(el: string): number {}
 

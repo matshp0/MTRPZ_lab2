@@ -43,7 +43,7 @@ describe('List class', () => {
     expect(() => list.insert('b', -1)).toThrow();
     expect(() => list.insert('b', 100)).toThrow();
     expect(() => list.insert('b', 2.5)).toThrow();
-    expect(list.length()).toBe(7);
+    expect(getElements(list)).toBe('abacaad');
   });
 
   it('should return proper value from get method', () => {
@@ -58,15 +58,43 @@ describe('List class', () => {
     expect(list.get(5)).toBe('f');
   });
 
-  it('should delete properly elements by index', () => {
-    expect(() => list.get(-1)).toThrow();
-    expect(() => list.get(100)).toThrow();
-    expect(() => list.get(2.5)).toThrow();
+  it('should delete elements properly by index', () => {
+    expect(() => list.delete(-1)).toThrow();
+    expect(() => list.delete(100)).toThrow();
+    expect(() => list.delete(2.5)).toThrow();
     expect(getElements(list)).toBe('abcdef');
     expect(list.delete(0)).toBe('a');
     expect(list.delete(4)).toBe('f');
     expect(getElements(list)).toBe('bcde');
     expect(list.delete(2)).toBe('d');
     expect(getElements(list)).toBe('bce');
+  });
+
+  it('should be iterable', () => {
+    let sum = '';
+    for (const el of list) {
+      sum += el;
+    }
+    expect(sum).toBe('abcdef');
+    list = new List();
+    sum = '';
+    for (const el of list) {
+      sum += el;
+    }
+    expect(sum).toBe('');
+  });
+
+  it('should properly delete elements with deleteAll method', () => {
+    expect(() => list.deleteAll('asd')).toThrow();
+    expect(() => list.deleteAll('b')).not.toThrow();
+    expect(getElements(list)).toBe('acdef');
+    list.append('1');
+    list.append('2');
+    list.append('1');
+    list.append('1');
+    list.insert('1', 0);
+    expect(getElements(list)).toBe('1acdef1211');
+    expect(() => list.deleteAll('1')).not.toThrow();
+    expect(getElements(list)).toBe('acdef2');
   });
 });
