@@ -97,4 +97,14 @@ describe('List class', () => {
     expect(() => list.deleteAll('1')).not.toThrow();
     expect(getElements(list)).toBe('acdef2');
   });
+
+  it('should properly copy list and return its clone', () => {
+    let newList = list.clone();
+    expect(newList).not.toBe(list);
+    expect(getElements(newList)).toBe(getElements(list));
+    list = new List();
+    newList = list.clone();
+    expect(newList).not.toBe(list);
+    expect(getElements(newList)).toBe(getElements(list));
+  });
 });

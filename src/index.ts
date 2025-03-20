@@ -114,7 +114,13 @@ export class List {
     }
   }
 
-  clone(): List {}
+  clone(): List {
+    const copy = new List();
+    for (const el of this) {
+      copy.append(el);
+    }
+    return copy;
+  }
 
   reverse(): void {}
 
