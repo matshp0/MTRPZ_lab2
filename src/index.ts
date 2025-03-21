@@ -159,7 +159,9 @@ export class List {
     this.len = 0;
   }
 
-  extend(list: List): void {}
+  extend(list: List): void {
+    for (const el of list) {
+      this.append(el);
+    }
+  }
 }
-
-const list = new List();

@@ -156,4 +156,16 @@ describe('List class', () => {
     expect(() => list.clear()).not.toThrow();
     expect(getElements(list)).toBe('');
   });
+
+  it('should merge lists with extend method', () => {
+    const list2 = new List();
+    list2.append('1');
+    list2.append('2');
+    list2.append('3');
+    expect(() => list.extend(list2)).not.toThrow();
+    expect(getElements(list)).toBe('abcdef123');
+    list2.insert('g', 0);
+    expect(getElements(list)).toBe('abcdef123');
+    expect(getElements(list2)).toBe('g123');
+  });
 });
