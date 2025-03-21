@@ -145,7 +145,19 @@ export class List {
     return -1;
   }
 
-  clear(): void {}
+  findLast(el: string): number {
+    this.#validateInput(el);
+    for (let i = this.len - 1; i >= 0; i--) {
+      if (this.get(i) === el) return i;
+    }
+    return -1;
+  }
+
+  clear(): void {
+    this.#head = null;
+    this.#tail = null;
+    this.len = 0;
+  }
 
   extend(list: List): void {}
 }

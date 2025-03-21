@@ -120,7 +120,7 @@ describe('List class', () => {
     expect(getElements(list)).toBe('');
   });
 
-  it('should find first first entry of an element', () => {
+  it('should find first entry of an element', () => {
     expect(() => list.findFirst('a1')).toThrow();
     expect(list.findFirst('a')).toBe(0);
     expect(list.findFirst('b')).toBe(1);
@@ -131,5 +131,29 @@ describe('List class', () => {
     expect(list.findFirst('1')).toBe(-1);
     list.append('b');
     expect(list.findFirst('b')).toBe(1);
+  });
+
+  it('should find last entry of an element', () => {
+    expect(() => list.findLast('a1')).toThrow();
+    expect(list.findLast('a')).toBe(0);
+    expect(list.findLast('b')).toBe(1);
+    expect(list.findLast('c')).toBe(2);
+    expect(list.findLast('d')).toBe(3);
+    expect(list.findLast('e')).toBe(4);
+    expect(list.findLast('f')).toBe(5);
+    expect(list.findLast('1')).toBe(-1);
+    list.append('b');
+    expect(list.findLast('b')).toBe(6);
+  });
+
+  it('should clear list with clear method', () => {
+    expect(() => list.clear()).not.toThrow();
+    expect(getElements(list)).toBe('');
+    expect(() => list.append('a')).not.toThrow();
+    expect(() => list.append('b')).not.toThrow();
+    expect(() => list.insert('1', 0)).not.toThrow();
+    expect(getElements(list)).toBe('1ab');
+    expect(() => list.clear()).not.toThrow();
+    expect(getElements(list)).toBe('');
   });
 });
