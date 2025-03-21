@@ -122,9 +122,28 @@ export class List {
     return copy;
   }
 
-  reverse(): void {}
+  reverse(): void {
+    if (!this.#head) return;
+    const reverseNode = (node: Node<string> | null): void => {
+      if (!node) return;
+      const temp = node.next;
+      node.next = node.prev;
+      node.prev = temp;
+      reverseNode(node.prev);
+    };
+    reverseNode(this.#head);
+    const temp = this.#head;
+    this.#head = this.#tail;
+    this.#tail = temp;
+  }
 
-  findFirst(el: string): number {}
+  findFirst(el: string): number {
+    this.#validateInput(el);
+    for (let i = 0; i < this.len; i++) {
+      if (this.get(i) === el) return i;
+    }
+    return -1;
+  }
 
   clear(): void {}
 

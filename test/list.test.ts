@@ -107,4 +107,29 @@ describe('List class', () => {
     expect(newList).not.toBe(list);
     expect(getElements(newList)).toBe(getElements(list));
   });
+
+  it('should properly reverse list with reverse method', () => {
+    expect(() => list.reverse()).not.toThrow();
+    expect(getElements(list)).toBe('fedcba');
+    expect(() => list.append('1')).not.toThrow();
+    expect(() => list.append('2')).not.toThrow();
+    expect(() => list.insert('1', 0)).not.toThrow();
+    expect(getElements(list)).toBe('1fedcba12');
+    list = new List();
+    expect(() => list.reverse()).not.toThrow();
+    expect(getElements(list)).toBe('');
+  });
+
+  it('should find first first entry of an element', () => {
+    expect(() => list.findFirst('a1')).toThrow();
+    expect(list.findFirst('a')).toBe(0);
+    expect(list.findFirst('b')).toBe(1);
+    expect(list.findFirst('c')).toBe(2);
+    expect(list.findFirst('d')).toBe(3);
+    expect(list.findFirst('e')).toBe(4);
+    expect(list.findFirst('f')).toBe(5);
+    expect(list.findFirst('1')).toBe(-1);
+    list.append('b');
+    expect(list.findFirst('b')).toBe(1);
+  });
 });
