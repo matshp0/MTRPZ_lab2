@@ -39,8 +39,8 @@ To use or run tests for this project:
 
 ### **1. Clone the Repository**
 ```sh
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/matshp0/MTRPZ_lab2
+cd MTRPZ_lab2
 ```
 
 ### **2. Install Dependencies**
