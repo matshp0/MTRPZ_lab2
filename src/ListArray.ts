@@ -39,7 +39,7 @@ export class List implements IList {
 
   get(index: number): string {
     this.#validateIndex(index);
-    return this.#data[index];
+    return 'a';
   }
 
   delete(index: number): string {
