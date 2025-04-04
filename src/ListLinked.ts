@@ -1,3 +1,5 @@
+import type { IList } from './IList';
+
 class Node<T> {
   constructor(
     public value: T,
@@ -6,7 +8,7 @@ class Node<T> {
   ) {}
 }
 
-export class List {
+export class List implements IList {
   len: number;
   #head: Node<string> | null;
   #tail: Node<string> | null;

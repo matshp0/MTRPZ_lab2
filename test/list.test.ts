@@ -1,4 +1,4 @@
-import { List } from '../src';
+import { List } from '../src/ListLinked';
 
 const getElements = (l: List): string => {
   let result = '';
